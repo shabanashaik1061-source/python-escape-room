@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Escape Room</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="room">
+
+    <!-- LIGHT EFFECTS -->
+
+    <div class="ceiling-light light-one"></div>
+    <div class="ceiling-light light-two"></div>
+
+    <div class="red-light"></div>
+
+    <!-- TOP HUD -->
+
+    <header class="hud">
+
+        <div class="game-title">
+
+            <span class="lock">🔐</span>
+
+            <div>
+                <h1>ESCAPE ROOM</h1>
+                <p>PROJECT: PYTHON</p>
+            </div>
+
+        </div>
+
+
+        <div class="hud-right">
+
+            <div class="hud-item">
+                <span>❤️</span>
+                <div>
+                    <small>LIVES</small>
+                    <strong id="lives">3</strong>
+                </div>
+            </div>
+
+
+            <div class="hud-item">
+                <span>🏆</span>
+                <div>
+                    <small>BADGES</small>
+                    <strong id="badge-count">0</strong>
+                </div>
+            </div>
+
+        </div>
+
+    </header>
+
+
+    <!-- ROOM -->
+
+    <main class="room-content">
+
+
+        <!-- INTRO -->
+
+        <section id="welcome-screen"
+                 class="overlay-panel">
+
+            <div class="warning-symbol">⚠</div>
+
+            <p class="small-label">CLASSIFIED CHAMBER</p>
+
+            <h2>WELCOME, ESCAPE PLAYER</h2>
+
+            <p class="intro-text">
+
+                You are locked inside the Python Escape Room.
+
+                Four doors stand between you and freedom.
+
+                Choose carefully.
+
+            </p>
+
+            <div class="rules">
+
+                <div>❤️ <b>3</b> Lives</div>
+
+                <div>🔐 Solve the puzzles</div>
+
+                <div>🏆 Collect badges</div>
+
+            </div>
+
+            <button class="neon-button"
+                    onclick="startGame()">
+
+                ENTER THE ROOM
+
+            </button>
+
+        </section>
+
+
+        <!-- DOORS -->
+
+        <section id="door-screen"
+                 class="game-screen hidden">
+
+            <div class="room-heading">
+
+                <span class="location">
+                    LOCATION: UNKNOWN CHAMBER
+                </span>
+
+                <h2>CHOOSE YOUR DOOR</h2>
+
+                <p>
+                    Every choice has consequences.
+                </p>
+
+            </div>
+
+
+            <div class="doors">
+
+
+                <!-- MATH -->
+
+                <button class="door door-math"
+                        onclick="openDoor(1)">
+
+                    <div class="door-number">01</div>
+
+                    <div class="door-frame">
+
+                        <div class="door-light"></div>
+
+                        <div class="door-symbol">
+                            ∑
+                        </div>
+
+                        <div class="door-name">
+                            MATH
+                        </div>
+
+                    </div>
+
+                    <span>
+                        LOGIC CHAMBER
+                    </span>
+
+                </button>
+
+
+                <!-- PATTERN -->
+
+                <button class="door door-pattern"
+                        onclick="openDoor(2)">
+
+                    <div class="door-number">02</div>
+
+                    <div class="door-frame">
+
+                        <div class="door-light"></div>
+
+                        <div class="door-symbol">
+                            ?
+                        </div>
+
+                        <div class="door-name">
+                            PATTERN
+                        </div>
+
+                    </div>
+
+                    <span>
+                        SECRET CHAMBER
+                    </span>
+
+                </button>
+
+
+                <!-- CODE -->
+
+                <button class="door door-code"
+                        onclick="openDoor(3)">
+
+                    <div class="door-number">03</div>
+
+                    <div class="door-frame">
+
+                        <div class="door-light"></div>
+
+                        <div class="door-symbol">
+                            01
+                        </div>
+
+                        <div class="door-name">
+                            CODE
+                        </div>
+
+                    </div>
+
+                    <span>
+                        RANDOM CHAMBER
+                    </span>
+
+                </button>
+
+
+                <!-- DARE -->
+
+                <button class="door door-dare"
+                        onclick="openDare()">
+
+                    <div class="door-number">04</div>
+
+                    <div class="door-frame">
+
+                        <div class="door-light red"></div>
+
+                        <div class="door-symbol">
+                            !
+                        </div>
+
+                        <div class="door-name">
+                            DARE
+                        </div>
+
+                    </div>
+
+                    <span>
+                        NO QUESTIONS ASKED
+                    </span>
+
+                </button>
+
+
+            </div>
+
+        </section>
+
+
+        <!-- MATH PUZZLE -->
+
+        <section id="math-screen"
+                 class="puzzle-screen hidden">
+
+            <div class="puzzle-top">
+
+                <span>CHAMBER 01</span>
+
+                <span>LOGIC TEST</span>
+
+            </div>
+
+            <div class="puzzle-icon">
+                ∑
+            </div>
+
+            <h2>THE MATHEMATICAL LOCK</h2>
+
+            <p>
+                The door is protected by an ancient calculation.
+            </p>
+
+            <div class="equation">
+
+                7 × 6 + 8 = ?
+
+            </div>
+
+            <input id="math-answer"
+                   type="number"
+                   placeholder="ENTER CODE">
+
+            <button class="neon-button"
+                    onclick="submitMath()">
+
+                UNLOCK
+
+            </button>
+
+            <button class="back-button"
+                    onclick="backToDoors()">
+
+                ← RETURN TO ROOM
+
+            </button>
+
+        </section>
+
+
+        <!-- PATTERN PUZZLE -->
+
+        <section id="pattern-screen"
+                 class="puzzle-screen hidden">
+
+            <div class="puzzle-top">
+
+                <span>CHAMBER 02</span>
+
+                <span>SECRET TEST</span>
+
+            </div>
+
+            <div class="puzzle-icon">
+                ?
+            </div>
+
+            <h2>THE MYSTERY LOCK</h2>
+
+            <p>
+                The machine whispers one word...
+            </p>
+
+            <div class="secret-message">
+
+                "Something unknown and difficult
+                to explain..."
+
+            </div>
+
+            <div class="attempt-display">
+
+                ATTEMPTS LEFT:
+                <span id="pattern-attempts">2</span>
+
+            </div>
+
+            <input id="pattern-answer"
+                   type="text"
+                   placeholder="ENTER SECRET WORD">
+
+            <button class="neon-button"
+                    onclick="submitPattern()">
+
+                BREAK THE CODE
+
+            </button>
+
+            <button class="back-button"
+                    onclick="backToDoors()">
+
+                ← RETURN TO ROOM
+
+            </button>
+
+        </section>
+
+
+        <!-- CODE PUZZLE -->
+
+        <section id="code-screen"
+                 class="puzzle-screen hidden">
+
+            <div class="puzzle-top">
+
+                <span>CHAMBER 03</span>
+
+                <span>LUCK TEST</span>
+
+            </div>
+
+            <div class="puzzle-icon">
+                🎲
+            </div>
+
+            <h2>THE RANDOM LOCK</h2>
+
+            <p>
+                Somewhere between 1 and 5 is the number
+                that will open the door.
+            </p>
+
+            <div class="number-display">
+
+                1 &nbsp; 2 &nbsp; 3 &nbsp; 4 &nbsp; 5
+
+            </div>
+
+            <div class="attempt-display">
+
+                GUESSES LEFT:
+                <span id="code-attempts">2</span>
+
+            </div>
+
+            <input id="code-answer"
+                   type="number"
+                   min="1"
+                   max="5"
+                   placeholder="1 - 5">
+
+            <button class="neon-button"
+                    onclick="submitCode()">
+
+                GUESS NUMBER
+
+            </button>
+
+            <button class="back-button"
+                    onclick="backToDoors()">
+
+                ← RETURN TO ROOM
+
+            </button>
+
+        </section>
+
+
+        <!-- RESULT -->
+
+        <section id="result-screen"
+                 class="result-screen hidden">
+
+            <div id="result-icon"
+                 class="result-icon">
+
+                ✓
+
+            </div>
+
+            <h2 id="result-title">
+                DOOR UNLOCKED
+            </h2>
+
+            <p id="result-message"></p>
+
+            <div id="new-badge"
+                 class="earned-badge"></div>
+
+            <button class="neon-button"
+                    onclick="backToDoors()">
+
+                CONTINUE
+
+            </button>
+
+        </section>
+
+
+        <!-- ESCAPED -->
+
+        <section id="escape-screen"
+                 class="result-screen victory hidden">
+
+            <div class="victory-icon">
+                🏆
+            </div>
+
+            <p class="small-label">
+                SECURITY OVERRIDE
+            </p>
+
+            <h1>YOU ESCAPED</h1>
+
+            <p>
+                The chamber has been unlocked.
+                You survived the Python Escape Room.
+            </p>
+
+            <div id="final-badge"
+                 class="earned-badge"></div>
+
+            <button class="neon-button"
+                    onclick="startNewGame()">
+
+                PLAY AGAIN
+
+            </button>
+
+        </section>
+
+
+        <!-- GAME OVER -->
+
+        <section id="gameover-screen"
+                 class="result-screen game-over hidden">
+
+            <div class="skull">
+                💀
+            </div>
+
+            <p class="small-label">
+                SYSTEM FAILURE
+            </p>
+
+            <h1>GAME OVER</h1>
+
+            <p>
+                You ran out of lives.
+                The chamber remains locked.
+            </p>
+
+            <button class="neon-button"
+                    onclick="startNewGame()">
+
+                TRY AGAIN
+
+            </button>
+
+        </section>
+
+
+    </main>
+
+
+    <!-- BADGES -->
+
+    <aside class="badge-panel">
+
+        <div class="badge-title">
+
+            <span>🏆</span>
+
+            <div>
+                <small>ACHIEVEMENTS</small>
+                <strong>BADGE COLLECTION</strong>
+            </div>
+
+        </div>
+
+        <div id="badges"
+             class="badge-list">
+
+            <span class="empty-badge">
+                NO BADGES COLLECTED
+            </span>
+
+        </div>
+
+    </aside>
+
+
+    <!-- BOTTOM -->
+
+    <footer>
+
+        <span>SYSTEM: ONLINE</span>
+
+        <span>ESCAPE ROOM v1.0</span>
+
+        <span>⚡ POWER: 87%</span>
+
+    </footer>
+
+</div>
+
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>
