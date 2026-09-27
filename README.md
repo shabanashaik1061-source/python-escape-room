@@ -12,20 +12,20 @@ This project started as a simple Python console game. I wanted to make it more i
 
 ### 🏠 Welcome to the Escape Room
 
-![Escape Room Welcome Screen](screenshots/wlecome screen.png)
+![Escape Room Welcome Screen](screenshots/wlecome_screen.)
 
 ### 🚪 Choose Your Door
 
-![Choose Your Door](screenshots/Doors screen.png)
-![Choose Your Door](screenshots/Door screen2.png)
+![Choose Your Door](screenshots/Doors_screen.png)
+![Choose Your Door](screenshots/Door_screen2.png)
 
 ### 🧩 Solve the Challenge
 
-![Puzzle Challenge](screenshots/puzzle screen.png)
+![Puzzle Challenge](screenshots/puzzle_screen.png)
 
 ### 🏆 Escape Successfully
 
-![Escape Success](screenshots/success screen.png)
+![Escape Success](screenshots/success_screen.png)
 
 ---
 
@@ -104,8 +104,16 @@ Escape_Room/
 
 ### 1. Clone the repository
 
+Clone this repository using Git:
+
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_LINK
+git clone https://github.com/shabanashaik1061-source/python-escape-room.git
+```
+
+Then navigate to the project folder:
+
+```bash
+cd python-escape-room
 ```
 
 ### 2. Open the project
