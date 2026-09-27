@@ -12,8 +12,7 @@ This project started as a simple Python console game. I wanted to make it more i
 
 ### 🏠 Welcome to the Escape Room
 
-![Escape Room Welcome Screen](screenshots/wlecome_screen.)
-
+![Escape Room Welcome Screen](screenshots/welcome_screen.png)
 ### 🚪 Choose Your Door
 
 ![Choose Your Door](screenshots/Doors_screen.png)
